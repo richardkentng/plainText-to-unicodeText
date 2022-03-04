@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #d5c9bc;
+}
+
+.select-style-form .radio-styles-input {
+  display: none;
+}
+.select-style-form .radio-styles-input:checked + label {
+  background-color: #b4ab91;
+}
+.select-style-form .style-label {
+  background-color: white;
+  display: inline-block;
+  text-align: center;
+  line-height: 1em;
+  padding: 1.2em 1em;
+  border: solid silver 1px;
+  border-radius: 0.3em;
+}
+.select-style-form .style-label:hover {
+  filter: brightness(0.95);
+}
+
+.auto-read-write-clipboard-label {
+  font-size: 0.8rem;
+}
+
+.textareas .textarea2-btn-cont {
+  position: relative;
+}
+.textareas .textarea2-btn-cont .copy-to-clipboard-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0.5;
+  border-radius: 0.3em;
+}
+.textareas .textarea2-btn-cont .copy-to-clipboard-btn i {
+  font-size: 2em;
+}
+
+@media (min-width: 768px) {
+  .textareas > * {
+    flex: 1;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
