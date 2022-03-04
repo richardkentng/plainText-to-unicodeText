@@ -27,6 +27,9 @@ body {
   font-size: 0.8rem;
 }
 
+.textareas textarea {
+  height: 110px;
+}
 .textareas .textarea2-btn-cont {
   position: relative;
 }
@@ -41,9 +44,14 @@ body {
   font-size: 2em;
 }
 
+@media (min-width: 576px) {
+  .textareas textarea {
+    height: 300px;
+  }
+}
 @media (min-width: 768px) {
   .textareas > * {
-    flex: 1;
+    width: 50%;
   }
 }
 

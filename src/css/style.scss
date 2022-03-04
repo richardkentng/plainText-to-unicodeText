@@ -34,6 +34,9 @@ body {
 }
 
 .textareas {
+  textarea {
+    height: 110px;
+  }
   .textarea2-btn-cont {
     position: relative;
     .copy-to-clipboard-btn {
@@ -48,12 +51,19 @@ body {
     }
   }
 }
-
-//make both textareas even width at the md breakpoint
+//increase height of textareas
+@media (min-width: 576px) {
+  .textareas {
+    textarea {
+      height: 300px;
+    }
+  }
+}
+//make both textareas the same width
 @media (min-width: 768px) {
   .textareas {
     & > * {
-      flex: 1;
+      width: 50%;
     }
   }
 }
