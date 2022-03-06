@@ -48,7 +48,7 @@ body {
 }
 .textarea-groups .textarea-1:disabled,
 .textarea-groups .textarea-2:disabled {
-  background-color: #eee;
+  background-color: #eee !important;
 }
 
 @media (min-width: 576px) {
