@@ -52,6 +52,9 @@ body {
   .textarea-1,
   .textarea-2 {
     height: 110px;
+    &:disabled {
+      background-color: #eee;
+    }
   }
 }
 
