@@ -62,6 +62,7 @@ clearTextareasBtn.addEventListener("click", clearTextareas);
 //---------------------------------------------------
 
 async function onClick_radioStylesLabel(e) {
+  animateJump(e.target);
   await sleep(5); //wait for radioNodeList to update with selected value
 
   //save clicked style to local storage
