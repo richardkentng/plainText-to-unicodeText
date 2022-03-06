@@ -42,31 +42,15 @@ body {
   font-size: 0.8rem;
 }
 
-.textareas textarea {
+.textarea-groups .textarea-1,
+.textarea-groups .textarea-2 {
   height: 110px;
-}
-.textareas .textarea2-btn-cont {
-  position: relative;
-}
-.textareas .textarea2-btn-cont .copy-to-clipboard-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  opacity: 0.5;
-  border-radius: 0.3em;
-}
-.textareas .textarea2-btn-cont .copy-to-clipboard-btn i {
-  font-size: 2em;
 }
 
 @media (min-width: 576px) {
-  .textareas textarea {
+  .textarea-groups .textarea-1,
+.textarea-groups .textarea-2 {
     height: 300px;
-  }
-}
-@media (min-width: 768px) {
-  .textareas > * {
-    width: 50%;
   }
 }
 

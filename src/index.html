@@ -31,14 +31,16 @@
 		<input type="checkbox" class="form-check-input auto-read-write-clipboard-cb" name="" id="checkbox1">
 		<label for="checkbox1" class="text-muted auto-read-write-clipboard-label ms-1"> automatically read from & write to clipboard when you click a style ^</label>
 	</div>
-	<!-- button to clear textareas -->
-	<button class="btn btn-outline-dark clear-textareas-btn form-control opacity-50 disabled"><i class="bi-x-square"></i></button>
 	<!-- textarea1 & textarea2 -->
-	<div class="textareas d-flex flex-column flex-md-row">
-			<textarea class="textarea-1 form-control p-4" placeholder="enter plain text"></textarea>
-			<div class="textarea2-btn-cont">
-				<textarea class="textarea-2 form-control p-4" disabled></textarea>
-				<button class="btn btn-outline-dark copy-to-clipboard-btn"><i class="bi-clipboard"></i></button>
+	<div class="d-flex flex-column flex-sm-row textarea-groups">
+			<div class="input-group m-1">
+				<textarea class="flex-grow-1 bg-light rounded-start p-3 textarea-1" placeholder="enter plain text"></textarea>
+				<button class="btn btn-outline-dark fs-4 opacity-50 clear-textareas-btn"><i class="bi-x-square"></i></button>
+			</div>
+
+			<div class="input-group m-1">
+				<textarea class="flex-grow-1 bg-light rounded-start p-3 textarea-2" disabled></textarea>
+				<button class="btn btn-outline-dark fs-4 opacity-50 copy-to-clipboard-btn"><i class="bi-clipboard"></i></button>
 			</div>
 	</div>
 	

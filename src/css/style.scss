@@ -48,37 +48,19 @@ body {
   font-size: 0.8rem;
 }
 
-.textareas {
-  textarea {
+.textarea-groups {
+  .textarea-1,
+  .textarea-2 {
     height: 110px;
   }
-  .textarea2-btn-cont {
-    position: relative;
-    .copy-to-clipboard-btn {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      opacity: 0.5;
-      border-radius: 0.3em;
-      i {
-        font-size: 2em;
-      }
-    }
-  }
 }
-//increase height of textareas
+
+// //increase height of textareas
 @media (min-width: 576px) {
-  .textareas {
-    textarea {
+  .textarea-groups {
+    .textarea-1,
+    .textarea-2 {
       height: 300px;
-    }
-  }
-}
-//make both textareas the same width
-@media (min-width: 768px) {
-  .textareas {
-    & > * {
-      width: 50%;
     }
   }
 }
