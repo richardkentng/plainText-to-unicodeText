@@ -9,23 +9,37 @@ body {
 }
 
 .select-style-form {
-  .radio-styles-input {
-    display: none;
-    &:checked + label {
-      background-color: $darker-color;
+  .select-style-input-groups {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    & > .input-pair {
+      flex: 1;
+      max-width: 100px;
     }
-  }
-  .style-label {
-    background-color: white;
-    display: inline-block;
-    text-align: center;
-    line-height: 1em;
-    padding: 1.2em 1em;
-    border: solid silver 1px;
-    border-radius: 0.3em;
-    &:hover {
-      filter: brightness(0.95);
-      cursor: pointer;
+    .radio-styles-input {
+      display: none;
+      &:checked + label {
+        background-color: $darker-color;
+      }
+    }
+    .style-label {
+      background-color: white;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      line-height: 1em;
+      padding: 1.2em 0.5em;
+      border: solid silver 1px;
+      border-radius: 0.3em;
+      vertical-align: middle;
+      &:hover {
+        filter: brightness(0.95);
+        cursor: pointer;
+      }
     }
   }
 }
