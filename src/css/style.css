@@ -19,7 +19,7 @@ body {
 .select-style-form .select-style-input-groups .radio-styles-input:checked + label {
   background-color: #b4ab91;
 }
-.select-style-form .select-style-input-groups .style-label {
+.select-style-form .select-style-input-groups .radio-styles-label {
   background-color: white;
   display: inline-flex;
   justify-content: center;
@@ -33,7 +33,7 @@ body {
   border-radius: 0.3em;
   vertical-align: middle;
 }
-.select-style-form .select-style-input-groups .style-label:hover {
+.select-style-form .select-style-input-groups .radio-styles-label:hover {
   filter: brightness(0.95);
   cursor: pointer;
 }

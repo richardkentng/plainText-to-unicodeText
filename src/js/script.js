@@ -1,5 +1,5 @@
 const radioStylesForm = document.body.querySelector(".select-style-form");
-const radioStylesLabels = document.body.querySelectorAll(".style-label");
+const radioStylesLabels = document.body.querySelectorAll(".radio-styles-label");
 const textarea1 = document.body.querySelector(".textarea-1");
 const textarea2 = document.body.querySelector(".textarea-2");
 const copyToClipboardBtn = document.body.querySelector(
