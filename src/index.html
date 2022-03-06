@@ -18,38 +18,47 @@
 	<title>Plain > Unicode</title>
 </head>
 <body class="container mt-5">
-	<h1>Convert Plain Text to Unicode Text</h1>
-	<form class="select-style-form mb-3">
-		<label class="my-3 text-muted">Select a style:</label>
-		<!-- radio inputs and their labels -->
-		<div class="select-style-input-groups"><!-- populated by javascript --></div>
-	</form>
-	<!-- checkbox: automatically read from & write to clipboard when you click a style ^ -->
-	<div class="my-3">
-		<input type="checkbox" class="form-check-input auto-read-write-clipboard-cb" name="" id="checkbox1">
-		<label for="checkbox1" class="text-muted auto-read-write-clipboard-label ms-1"> automatically read from & write to clipboard when you click a style ^</label>
-	</div>
-	<!-- textarea1 & textarea2 -->
-	<div class="d-flex flex-column flex-sm-row textarea-groups">
-			<div class="flex-grow-1 d-flex m-1">
-				<textarea class="flex-grow-1 rounded-start p-3 textarea-1" placeholder="enter plain text"></textarea>
-				<button class="btn btn-outline-dark fs-4 opacity-50 clear-textareas-btn"><i class="bi-x-square"></i></button>
-			</div>
-
-			<div class="flex-grow-1 d-flex m-1">
-				<textarea class="flex-grow-1 rounded-start p-3 textarea-2" disabled></textarea>
-				<button class="btn btn-outline-dark fs-4 opacity-50 copy-to-clipboard-btn"><i class="bi-clipboard"></i></button>
-			</div>
-	</div>
-	<!-- Bootstrap Toast Container -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
-		<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-			<strong class="me-auto toast-header-text-cont"><!-- populated by javascript --></strong>
-			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-			<div class="toast-body"><!-- populated by javascript --></div>
+		<h1>Convert Plain Text to Unicode Text</h1>
+		<form class="select-style-form mb-3">
+			<label class="my-3 text-muted">Select a style:</label>
+			<!-- radio inputs and their labels -->
+			<div class="select-style-input-groups"><!-- populated by javascript --></div>
+		</form>
+		<!-- checkbox: automatically read from & write to clipboard when you click a style ^ -->
+		<div class="my-3">
+			<input type="checkbox" class="form-check-input auto-read-write-clipboard-cb" name="" id="checkbox1">
+			<label for="checkbox1" class="text-muted auto-read-write-clipboard-label ms-1"> automatically read from & write to clipboard when you click a style ^</label>
 		</div>
-	</div>
+		<!-- textarea1 & textarea2 -->
+		<div class="d-flex flex-column flex-sm-row textarea-groups">
+				<div class="flex-grow-1 d-flex m-1">
+					<textarea class="flex-grow-1 rounded-start p-3 textarea-1" placeholder="enter plain text"></textarea>
+					<button class="btn btn-outline-dark fs-4 opacity-50 clear-textareas-btn"><i class="bi-x-square"></i></button>
+				</div>
+	
+				<div class="flex-grow-1 d-flex m-1">
+					<textarea class="flex-grow-1 rounded-start p-3 textarea-2" disabled></textarea>
+					<button class="btn btn-outline-dark fs-4 opacity-50 copy-to-clipboard-btn"><i class="bi-clipboard"></i></button>
+				</div>
+			</div>
+		<!-- Bootstrap Toast Container -->
+		<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
+			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+				<strong class="me-auto toast-header-text-cont"><!-- populated by javascript --></strong>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+				<div class="toast-body"><!-- populated by javascript --></div>
+			</div>
+		</div>
+		<footer class="mt-5">
+			<hr class="my-2">
+			<a
+			class="text-muted"
+			href="https://github.com/richardkentng/plainText-to-unicodeText"
+			target="_blank"
+			>Github
+			</a>
+		</footer>
 </body>
 </html>
