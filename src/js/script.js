@@ -1,3 +1,5 @@
+addRadioInputsAndLabelsToHTML();
+
 const radioStylesForm = document.body.querySelector(".select-style-form");
 const radioStylesLabels = document.body.querySelectorAll(".radio-styles-label");
 const textarea1 = document.body.querySelector(".textarea-1");
@@ -10,8 +12,6 @@ const autoReadWriteClipboard_checkbox = document.body.querySelector(
   ".auto-read-write-clipboard-cb"
 );
 const clearTextareasBtn = document.body.querySelector(".clear-textareas-btn");
-
-stylize_radioStylesLabels();
 
 //******* update style from local storage or default to bold sans
 const lastClickedStyle = localStorage.getItem("style");
@@ -104,13 +104,6 @@ function getStyle() {
   return radioStylesForm.styles.value;
 }
 
-function stylize_radioStylesLabels() {
-  radioStylesLabels.forEach((l) => {
-    //stylize text of each label according to its text content
-    l.textContent = convertToUnicodeText(l.textContent, l.textContent);
-  });
-}
-
 async function onClick_copyToClipboardBtn() {
   if (!textarea2.value) return;
   //copy textarea2.value to clipboard
@@ -175,4 +168,25 @@ function clearTextareas() {
   textarea2.value = "";
 
   enableDisable_clearTextAreasBtn();
+}
+
+//----------------------------------------------------
+// *************** functions to populate HTML
+//----------------------------------------------------
+
+function addRadioInputsAndLabelsToHTML() {
+  const styles = Object.keys(get_style_unicodeChars());
+
+  const inputPairs = styles
+    .map((style) => {
+      const unicodedText = convertToUnicodeText(style, style); //text content for label
+      return `<div class="input-pair">
+  <input type="radio" name="styles" value="${style}" class="radio-styles-input" id="${style}">
+  <label class="radio-styles-label" for="${style}">${unicodedText}</label>
+  </div>`;
+    })
+    .join("");
+
+  document.body.querySelector(".select-style-input-groups").innerHTML =
+    inputPairs;
 }
