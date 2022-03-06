@@ -1,5 +1,8 @@
 addRadioInputsAndLabelsToHTML();
 
+//---------------------------------------------------
+//************** QUERY SELECT ELEMENTS ***************/
+//---------------------------------------------------
 const radioStylesForm = document.body.querySelector(".select-style-form");
 const radioStylesLabels = document.body.querySelectorAll(".radio-styles-label");
 const textarea1 = document.body.querySelector(".textarea-1");
@@ -13,22 +16,18 @@ const autoReadWriteClipboard_checkbox = document.body.querySelector(
 );
 const clearTextareasBtn = document.body.querySelector(".clear-textareas-btn");
 
-//******* update style from local storage or default to bold sans
-const lastClickedStyle = localStorage.getItem("style");
-//select style
-radioStylesForm.styles.value = lastClickedStyle || "bold sans";
+//update style from local storage
+setStyle(getLocalStorage("style") || "bold sans");
 
 //update checkbox from local storage
-autoReadWriteClipboard_checkbox.checked = localStorage.getItem(
+autoReadWriteClipboard_checkbox.checked = getLocalStorage(
   "auto-read-write-clipboard"
 )
   ? true
   : false;
 
-//if above checkbox is checked, disable textareas and clear them, else enable textarea1
-disableAndClearTextareas_enableTextarea1(
-  autoReadWriteClipboard_checkbox.checked
-);
+// disable/enable & clear textareas conditionally
+renovateTextareas(autoReadWriteClipboard_checkbox.checked);
 
 //---------------------------------------------------
 //************** ADD EVENT LISTENERS ***************/
@@ -41,18 +40,19 @@ radioStylesLabels.forEach((radioStyleLabel) => {
 
 //listen for input event on textarea1, then populate textarea2 with unicoded textarea1
 textarea1.addEventListener("input", function () {
-  populateTextarea2_with_textToBeUnicoded(this.value);
+  populateTextarea2_w_textToUnicode(this.value);
 });
 
 //listen for change on checkbox (autoReadWriteClipboard), then store the checkbox state to local storage
 autoReadWriteClipboard_checkbox.addEventListener("change", function () {
-  console.log("hi");
-  localStorage.setItem("auto-read-write-clipboard", this.checked ? "1" : "");
-  disableAndClearTextareas_enableTextarea1(this.checked);
+  setLocalStorage("auto-read-write-clipboard", this.checked ? "1" : "");
+  renovateTextareas(this.checked);
 });
 
 //listen for click on copy-to-clipboard-button, then copy textarea2.value to clipboard and reset clipboard icon
-copyToClipboardBtn.addEventListener("click", onClick_copyToClipboardBtn);
+copyToClipboardBtn.addEventListener("click", () => {
+  copyToClipboard(textarea2.value);
+});
 
 //listen for click on clearTextareasBtn, then clear textareas
 clearTextareasBtn.addEventListener("click", clearTextareas);
@@ -64,57 +64,108 @@ clearTextareasBtn.addEventListener("click", clearTextareas);
 async function onClick_radioStylesLabel(e) {
   animateJump(e.target);
   await sleep(5); //wait for radioNodeList to update with selected value
-
-  //save clicked style to local storage
-  localStorage.setItem("style", getStyle());
-
+  setLocalStorage("style", getStyle());
   if (autoReadWriteClipboard_checkbox.checked) {
-    //****** populate textarea1 with clipboard contents
-    textarea1.value = convertToPlainText(await navigator.clipboard.readText());
-    //if textarea1 only contains white space, alert user
-    const textarea1OnlyHasWhiteSpace =
-      textarea1.value.replace(/\s/g, "") === "";
-    if (textarea1OnlyHasWhiteSpace) {
-      textarea1.value = "NO TEXT DETECTED ON CLIPBOARD.";
-      return;
+    textarea1.value = convertToPlainText(await readClipboard());
+    populateTextarea2_w_textToUnicode(textarea1.value);
+    if (isWhiteSpace(textarea1.value)) {
+      return showToast("No text detected on clipboard!");
     }
   }
-
-  populateTextarea2_with_textToBeUnicoded(textarea1.value);
+  populateTextarea2_w_textToUnicode(textarea1.value);
 
   if (autoReadWriteClipboard_checkbox.checked) {
-    //copy textarea2.value to clipboard
-    onClick_copyToClipboardBtn();
+    copyToClipboard(textarea2.value);
   }
-
-  //focus textarea1
   textarea1.focus();
 }
 
-function populateTextarea2_with_textToBeUnicoded(textToBeUnicoded) {
+function populateTextarea2_w_textToUnicode(textToBeUnicoded) {
   textarea2.value = convertToUnicodeText(textToBeUnicoded, getStyle());
-  //reset clipboard icon
-  copyToClipboardIcon.setAttribute("class", "bi-clipboard");
-
-  //enable or disable clearTextAreasBtn based on whether textarea1 has content
-  enableDisable_clearTextAreasBtn();
+  resetClipboardIcon();
 }
 
 function getStyle() {
   return radioStylesForm.styles.value;
 }
 
-async function onClick_copyToClipboardBtn() {
-  if (!textarea2.value) return;
-  //copy textarea2.value to clipboard
-  await navigator.clipboard.writeText(textarea2.value);
+function setStyle(style) {
+  radioStylesForm.styles.value = style;
+}
+
+//----------------------------------------------------
+// *************** visual functions
+//----------------------------------------------------
+
+function renovateTextareas(checked) {
+  if (checked) {
+    textarea1.disabled = true;
+  } else {
+    textarea1.disabled = false;
+  }
+  clearTextareas();
+}
+
+function clearTextareas() {
+  textarea1.value = "";
+  textarea2.value = "";
+  resetClipboardIcon();
+  textarea1.focus();
+}
+
+function animateJump(ele) {
+  ele.addEventListener("transitionend", resetTranslation);
+  //enable animation
+  ele.style.transition = "transform 0.1s";
+  //translate element
+  ele.style.transform = "translateY(-10px)";
+  //after a delay, transitionend event fires and translation is reset
+  function resetTranslation() {
+    ele.style.transform = "translateY(0)";
+  }
+}
+
+function resetClipboardIcon() {
+  copyToClipboardIcon.setAttribute("class", "bi-clipboard");
+}
+
+//----------------------------------------------------
+// *************** utility functions
+//----------------------------------------------------
+
+async function copyToClipboard(content) {
+  if (isWhiteSpace(content)) return showToast("There is nothing to copy!");
+  await navigator.clipboard.writeText(content);
   fillClipboardIcon();
   animateJump(copyToClipboardBtn);
 
-  // local functions:
   function fillClipboardIcon() {
     copyToClipboardIcon.setAttribute("class", "bi-clipboard-check-fill");
   }
+}
+
+function readClipboard() {
+  return navigator.clipboard.readText();
+}
+
+function showToast(message, headerMessage = "ALERT") {
+  const toast = document.body.querySelector(".toast");
+  toast.querySelector(".toast-body").textContent = message;
+  toast.querySelector(".toast-header-text-cont").textContent = headerMessage;
+  const bsToast = new bootstrap.Toast(toast);
+  bsToast.show();
+}
+
+function isWhiteSpace(text) {
+  return text.replace(/\s/g, "") === "";
+}
+
+function getLocalStorage(key) {
+  return localStorage.getItem(key);
+}
+
+function setLocalStorage(key, value) {
+  localStorage.setItem(key, value);
 }
 
 function sleep(ms) {
@@ -123,55 +174,8 @@ function sleep(ms) {
   });
 }
 
-function animateJump(ele) {
-  //listen to 'transitionend" event
-  ele.addEventListener("transitionend", function () {
-    //reset translation
-    ele.style.transform = "translateY(0)";
-  });
-  //enable animation
-  ele.style.transition = "transform 0.1s";
-  //translate element
-  ele.style.transform = "translateY(-10px)";
-  //after a delay, transitionend event fires and translation is reset
-}
-
-function disableAndClearTextareas_enableTextarea1(checked) {
-  if (checked) {
-    textarea1.disabled = true;
-    clearTextareas();
-  } else {
-    textarea1.disabled = false;
-    textarea1.focus();
-  }
-}
 //----------------------------------------------------
-// *************** functions for clearTextAreasBtn
-//----------------------------------------------------
-
-function enableDisable_clearTextAreasBtn() {
-  if (textarea1.value) enable();
-  else disable();
-
-  function enable() {
-    clearTextareasBtn.classList.remove("disabled");
-  }
-  function disable() {
-    clearTextareasBtn.classList.add("disabled");
-    textarea1.focus();
-  }
-}
-
-function clearTextareas() {
-  //clear textareas
-  textarea1.value = "";
-  textarea2.value = "";
-
-  enableDisable_clearTextAreasBtn();
-}
-
-//----------------------------------------------------
-// *************** functions to populate HTML
+// *************** function to populate HTML
 //----------------------------------------------------
 
 function addRadioInputsAndLabelsToHTML() {
