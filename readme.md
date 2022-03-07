@@ -47,13 +47,22 @@ The end result needs no explanation. Beautiful, isn't it?
 ```
 //copy textarea2.value to clipboard
 onClick_copyToClipboardBtn();
-
 ```
 
-`copyToClipboard(textarea2.value)`
+```
+copyToClipboard(textarea2.value)
+```
 
 # Evolution
 
+## Earlier Version
+
 ![Earlier Version 1](./images-github/earlier-version-1.png)
+Issue: The copy-to-clipboard button makes text underneath it hard to read.
+Note to self: Do not use absolute-positioning to position buttons over text inputs!
+
+## Current Version
 
 ![Main Page](./images-github/main-page.png)
+Two additional styles were added.
+The buttons were relocated for more consistency. (Also, the copy-to-clipboard button no longer covers text.)
