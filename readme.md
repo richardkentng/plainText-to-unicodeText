@@ -67,4 +67,4 @@ Note to self: Do not use absolute-positioning to position buttons over text inpu
 ![Main Page](./images-github/main-page.png)
 
 Two additional styles were added.
-The buttons were relocated for more consistency. (Also, the copy-to-clipboard button no longer covers text.)
+The textarea buttons were relocated for more consistency. (Also, the copy-to-clipboard button in particular no longer covers text.)
