@@ -41,19 +41,19 @@ So if a user selects the 'italic sans' style, then this object `{a: '𝘢', b: '
 
 I make an effort to make code easier to read.
 In the following example, I originally had a comment explaining a function.
-I renamed the function for more simplicity. I also reworked the function so that it accepts an argument to copy.  
+I renamed the function for more clarity. I also reworked the function so that it accepts an argument to copy.  
 The end result needs no explanation. Beautiful, isn't it?
-``
-//copy textarea2.value to clipboard  
+
+```
+//copy textarea2.value to clipboard
 onClick_copyToClipboardBtn();
 
 ```
-`copyToClipboard(textarea2.value)`
 
+`copyToClipboard(textarea2.value)`
 
 # Evolution
 
 ![Earlier Version 1](./images-github/earlier-version-1.png)
 
 ![Main Page](./images-github/main-page.png)
-```
