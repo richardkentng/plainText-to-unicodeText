@@ -7,6 +7,15 @@
 Convert your plain text to unicode! I built this for someone who wanted to style text on Google Keep, which lacks bold/italic options. (**NOTE: Unicode characters CANNOT be searched through.**)
 Directions: First select a style, then enter some text, then copy the unicoded result, and lastly paste it into your app of choice (try this with iMessage for some fun!)
 
+# Technologies
+
+- Javascript
+- HTML
+- CSS
+- Bootstrap
+- SASS
+- Local Storage
+
 # Resources
 
 - Bootstrap
